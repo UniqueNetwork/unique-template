@@ -2,6 +2,7 @@ services:
 
   scan-crawler:
     image: uniquenetwork/substrate-proxy-scan-crawler:master
+    platform: linux/amd64
     restart: unless-stopped
     depends_on:
       - postgres
@@ -12,6 +13,7 @@ services:
 
   scan-api:
     image: uniquenetwork/substrate-proxy-scan-api:master
+    platform: linux/amd64
     restart: unless-stopped
     depends_on:
       - postgres
@@ -26,6 +28,7 @@ services:
 
   http-proxy:
     image: uniquenetwork/substrate-proxy-http-proxy:master
+    platform: linux/amd64
     restart: unless-stopped
     depends_on:
       - chain
