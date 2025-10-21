@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   createContext,
@@ -6,21 +6,22 @@ import {
   useMemo,
   useState,
   useContext,
-} from 'react';
-import { AssetHub, AssetHubInstance } from '@unique-nft/sdk';
+} from "react";
+import { UniqueChain, UniqueChainInstance } from "@unique-nft/sdk";
 
 export type SdkContextValueType = {
-  sdk?: AssetHubInstance;
+  sdk?: UniqueChainInstance;
 };
 
 export const UniqueSDKContext = createContext<SdkContextValueType>({
   sdk: undefined,
 });
 
-export const baseUrl = process.env.NEXT_PUBLIC_REST_URL || 'http://localhost:3000';
+export const baseUrl =
+  process.env.NEXT_PUBLIC_REST_URL || "http://localhost:3000";
 
 export const UniqueSDKProvider = ({ children }: PropsWithChildren) => {
-  const [sdk] = useState(() => AssetHub({ baseUrl }));
+  const [sdk] = useState(() => UniqueChain({ baseUrl }));
 
   const sdkValue = useMemo(() => ({ sdk }), [sdk]);
 
@@ -34,7 +35,7 @@ export const UniqueSDKProvider = ({ children }: PropsWithChildren) => {
 export const useSdkContext = () => {
   const context = useContext(UniqueSDKContext);
   if (!context) {
-    throw new Error('useSdkContext must be used within a UniqueSDKProvider');
+    throw new Error("useSdkContext must be used within a UniqueSDKProvider");
   }
   return context;
 };
