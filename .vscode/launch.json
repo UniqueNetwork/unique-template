@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Current TypeScript File",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": ["--experimental-transform-types"],
+      "program": "${file}",
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal",
+      "outFiles": []
+    }
+  ]
+}

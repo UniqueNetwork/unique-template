@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { WalletProvider } from "@/context/WalletContext";
 import { UniqueSDKProvider } from "@/context/UniqueSDKContext";
+import { UniqueIndexerProvider } from "@/context/UniqueIndexerContext";
+import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,9 +34,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <UniqueSDKProvider>
-          <WalletProvider>{children}</WalletProvider>
-        </UniqueSDKProvider>
+        <UniqueIndexerProvider>
+          <UniqueSDKProvider>
+            <WalletProvider>
+              <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+                <Header />
+                <main className="flex-1">
+                  {children}
+                </main>
+              </div>
+            </WalletProvider>
+          </UniqueSDKProvider>
+        </UniqueIndexerProvider>
       </body>
     </html>
   );

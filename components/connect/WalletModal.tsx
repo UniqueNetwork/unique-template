@@ -7,6 +7,10 @@ import { DisconnectButton } from './DisconnectButton';
 import { ModalHeader } from './ModalHeader';
 import { ModalOverlay } from './ModalOverlay';
 import { WalletItem } from './WalletItem';
+import {
+  IPolkadotExtensionAccount,
+  IPolkadotExtensionWalletInfo,
+} from '@unique-nft/utils/extension';
 
 export const WalletModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +45,7 @@ export const WalletModal: React.FC = () => {
     setShowAccounts(false);
   };
 
-  const handleWalletClick = async (selectedWallet: any) => {
+  const handleWalletClick = async (selectedWallet: IPolkadotExtensionWalletInfo) => {
     try {
       await connectWallet(selectedWallet);
       setShowAccounts(true);
@@ -50,7 +54,7 @@ export const WalletModal: React.FC = () => {
     }
   };
 
-  const handleAccountSelect = (account: any) => {
+  const handleAccountSelect = (account: IPolkadotExtensionAccount) => {
     selectAccount(account);
     handleClose();
   };
