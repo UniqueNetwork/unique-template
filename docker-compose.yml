@@ -1,5 +1,20 @@
 services:
 
+  explorer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    restart: unless-stopped
+    depends_on:
+      - scan-api
+      - http-proxy
+    ports:
+      - 3002:3002
+    environment:
+      - NEXT_PUBLIC_REST_URL=http://localhost:3000
+      - NEXT_PUBLIC_INDEXER_URL=http://localhost:3001
+
   scan-crawler:
     image: uniquenetwork/substrate-proxy-scan-crawler:master
     platform: linux/amd64
@@ -63,7 +78,7 @@ services:
       --dev
       --idle-autoseal-interval 2000
       --disable-autoseal-on-tx
-      --autoseal-finalization-delay 2000
+      --autoseal-finalization-delay 1
       --state-pruning archive
       --blocks-pruning archive
       --base-path /unique/data
